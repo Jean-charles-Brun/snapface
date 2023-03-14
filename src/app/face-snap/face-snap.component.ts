@@ -15,16 +15,16 @@ export class FaceSnapComponent implements OnInit{
   constructor( private faceSnapService: FaceSnapsService) {}
 
   ngOnInit(): void {
-    this.butonText ='On Snap!';
+    this.butonText ='Oh Snap!';
   }
 
   onSnap() {
     if (this.butonText === 'On Snap!'){
-      this.faceSnapService.snapFaceSnapById(this.faceSnap.id);
+      this.faceSnapService.snapFaceSnapById(this.faceSnap.id, 'snap');
       this.butonText = 'Oops, un Snap!';
     } else {
-      this.faceSnapService.unSnapFaceSnapById(this.faceSnap.id);
-      this.butonText = 'On Snap!';
+      this.faceSnapService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
+      this.butonText = 'Oh Snap!';
     }
   }
 
