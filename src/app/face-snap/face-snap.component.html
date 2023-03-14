@@ -6,5 +6,6 @@
   <p *ngIf="faceSnap.location"> Photo prise à {{ faceSnap.location }}</p>
   <p>
     <button (click)="onSnap()">{{butonText}}</button>
-    Snaps :  {{ faceSnap.snaps }} </p>
+    <span [ngStyle]="{ color: 'rgb(0,' + faceSnap.snaps + ', 0 )' }">Snaps :  {{ faceSnap.snaps }} </span>
+    </p>
 </div>

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
         title:'Meowww',
         description:'Space Cat',
         createdDate: new Date(),
-        snaps: 0,
+        snaps: 250,
         imageUrl: 'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif',
         location: 'Tours'
       },
