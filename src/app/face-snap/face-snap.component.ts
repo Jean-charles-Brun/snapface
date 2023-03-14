@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FaceSnap } from '../models/face-snap.model';
 
 @Component({
@@ -8,13 +8,10 @@ import { FaceSnap } from '../models/face-snap.model';
 })
 export class FaceSnapComponent implements OnInit{
 
-  faceSnap! : FaceSnap;
+  @Input() faceSnap!: FaceSnap;
   butonText!:string;
 
   ngOnInit(): void {
-
-    this.faceSnap = new FaceSnap('Meowww','Space Cat',new Date(),6, 'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif')
-
     this.butonText ='On Snap!';
   }
 
