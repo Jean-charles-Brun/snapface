@@ -13,28 +13,31 @@ export class AppComponent implements OnInit{
   lastSnap!: FaceSnap;
 
   ngOnInit(): void {
-    this.faceSnap = new FaceSnap(
-      'Meowww',
-      'Space Cat',
-      new Date(),
-      6,
-      'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif'
-      );
+    this.faceSnap = {
+      title:'Meowww',
+      description:'Space Cat',
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl: 'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif',
+      location: 'Tours'
+      };
 
-    this.otherSnap = new FaceSnap(
-      'My Goat',
-      'I LUV U',
-      new Date(),
-      15,
-      'https://i.giphy.com/media/cMso9wDwqSy3e/giphy.webp'
-    );
-    this.lastSnap = new FaceSnap(
-      'Dog Life',
-      'AOWWWWwwwwwwwwwwww',
-      new Date(),
-      28,
-      'https://i.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.webp'
-    );
+    this.otherSnap = {
+      title: 'My Goat',
+      description: 'I LUV U',
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl: 'https://i.giphy.com/media/cMso9wDwqSy3e/giphy.webp',
+      location: 'la mer'
+    };
+
+    this.lastSnap = {
+      title: 'Dog Life',
+      description: 'AOWWWWwwwwwwwwwwww',
+      createdDate: new Date(),
+      snaps: 0,
+      imageUrl: 'https://i.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.webp'
+    }
   }
 
 
