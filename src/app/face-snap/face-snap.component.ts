@@ -11,12 +11,15 @@ export class FaceSnapComponent implements OnInit{
   description!:string;
   createdDate!: Date;
   snaps!: number;
+  imageUrl!: string;
 
   ngOnInit(): void {
-    this.title = 'Pierro';
-    this.description = 'Mon BF since 86';
+    this.title = 'Meowww';
+    this.description = 'Space Cat';
     this.createdDate = new Date();
     this.snaps =6;
+    this.imageUrl = 'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif';
+
   }
 
 
