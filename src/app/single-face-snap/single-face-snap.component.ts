@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { FaceSnap } from '../models/face-snap.model';
 import { FaceSnapsService } from '../services/face-snaps.service';
 
@@ -22,13 +22,15 @@ export class SingleFaceSnapComponent {
     this.faceSnap$ = this.faceSnapService.getFaceSnapById(faceSnapId);
   }
 
-  onSnap() {
-    // if (this.butonText === 'Oh Snap!'){
-    //   this.faceSnapService.snapFaceSnapById(this.faceSnap.id, 'snap');
-    //   this.butonText = 'Oops, un Snap!';
-    // } else {
-    //   this.faceSnapService.snapFaceSnapById(this.faceSnap.id, 'unsnap');
-    //   this.butonText = 'Oh Snap!';
-    // }
+  onSnap(faceSnapId: number) {
+    if (this.butonText === 'Oh Snap!'){
+      this.faceSnap$ = this.faceSnapService.snapFaceSnapById(faceSnapId, 'snap').pipe(
+        tap(() => this.butonText = 'Oops, un Snap!')
+      );
+    } else {
+      this.faceSnap$ = this.faceSnapService.snapFaceSnapById(faceSnapId, 'unsnap').pipe(
+        tap(() => this.butonText = 'Oh Snap!')
+      );
+    }
   }
 }

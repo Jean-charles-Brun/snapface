@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable, switchMap } from "rxjs";
 import { FaceSnap } from "../models/face-snap.model";
 
 @Injectable({
@@ -9,48 +9,28 @@ import { FaceSnap } from "../models/face-snap.model";
 
 export class FaceSnapsService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   faceSnaps: FaceSnap[] = [
-    // {
-    //   id: 1,
-    //   title:'Meowww',
-    //   description:'Space Cat',
-    //   createdDate: new Date(),
-    //   snaps: 250,
-    //   imageUrl: 'https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif',
-    //   location: 'Tours'
-    // },
-    // {
-    //   id: 2,
-    //   title: 'My Goat',
-    //   description: 'I LUV U',
-    //   createdDate: new Date(),
-    //   snaps: 50,
-    //   imageUrl: 'https://i.giphy.com/media/cMso9wDwqSy3e/giphy.webp',
-    //   location: 'la mer'
-    // },
-    // {
-    //   id: 3,
-    //   title: 'Dog Life',
-    //   description: 'AOWWWWwwwwwwwwwwww',
-    //   createdDate: new Date(),
-    //   snaps: 0,
-    //   imageUrl: 'https://i.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.webp'
-    // }
+
   ];
 
   getAllFaceSnaps() : Observable <FaceSnap[]> {
-    return this.httpClient.get<FaceSnap[]>('http://localhost:3000/facesnaps');
+    return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
   }
 
   getFaceSnapById(id: number) : Observable <FaceSnap> {
-    return this.httpClient.get<FaceSnap>(`http://localhost:3000/facesnaps/${id}`);
+    return this.http.get<FaceSnap>(`http://localhost:3000/facesnaps/${id}`);
   }
 
-  snapFaceSnapById(id: number, snapType: 'snap' | 'unsnap') : void {
-    // const faceSnap = this.getFaceSnapById(id);
-    // snapType === 'snap' ? faceSnap.snaps++ : faceSnap.snaps--;
+  snapFaceSnapById(id: number, snapType: 'snap' | 'unsnap') : Observable <FaceSnap> {
+    return this.getFaceSnapById(id).pipe(
+      map(faceSnap => ({
+        ...faceSnap, // spread Operateur
+        snaps: faceSnap.snaps + ( snapType === 'snap' ? 1 : -1 )
+    })),
+    switchMap(updatedFaceSnap => this.http.put<FaceSnap>(`http://localhost:3000/facesnaps/${id}`, updatedFaceSnap))
+    );
   }
 
   addFaceSnap(formValue: {title: string, description: string, imageUrl: string, location?: string}): void{
