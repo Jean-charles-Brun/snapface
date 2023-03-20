@@ -11,10 +11,6 @@ export class FaceSnapsService {
 
   constructor(private http: HttpClient) {}
 
-  faceSnaps: FaceSnap[] = [
-
-  ];
-
   getAllFaceSnaps() : Observable <FaceSnap[]> {
     return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
   }
